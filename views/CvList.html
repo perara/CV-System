@@ -1,0 +1,28 @@
+﻿<h3>CV - Liste</h3>
+<span style="opacity: 0.5">Her finner du en liste over alle registerte CV'er i systemet.</span>
+<br/><br/>
+<div class="col-lg-4 no-padding">
+  <input type="text" ng-model="search" placeholder="Search Name" class="form-control"/>
+</div>
+
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Navn</th>
+      <th>Bursdag</th>
+      <th>CV</th>
+    </tr>
+  </thead>
+  
+  <tbody>
+    <tr ng-repeat="user in users | filter:search">
+      <td>{{user.firstname}} {{user.lastname}}</td>
+      <td>{{user.birthday}}</td>
+      <td class="no-padding" ng-click="showPDF({{user.id}})"><button class="btn btn-sm form-control sysco-blue flat white" ng-if="user.cvurl">Last Ned</button></td>
+    </tr>
+
+  </tbody>
+
+
+</table>

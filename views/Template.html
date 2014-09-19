@@ -1,0 +1,337 @@
+<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+<link href='http://fonts.googleapis.com/css?family=Roboto:400,900italic,700italic,900,700' rel='stylesheet' type='text/css'>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  /* This forces bottom valign */
+  .vbottom {
+    display: inline-block;
+    vertical-align: bottom;
+    float: none;
+  }
+
+  .page-breaker {
+    display: block;
+    page-break-after: always;
+    /*border :1px solid red;*/
+    margin-bottom: 20px;
+  }
+
+  /* General Stuff */
+  .margin-b-40 {
+    margin-bottom: 40px;
+  }
+
+  .margin-b-60 {
+    margin-bottom: 60px;
+  }
+
+  .margin-b-70 {
+    margin-bottom: 70px;
+  }
+
+  .margin-b-10 {
+    margin-bottom: 10px;
+  }
+
+  .margin-b-80 {
+    margin-bottom: 80px;
+  }
+
+  .section {
+    page-break-inside: avoid; /* IMPORTANT for Page breaking */
+  }
+
+  .no-padding {
+    padding: 0;
+  }
+
+  .no-padding-left {
+    padding-left: 0;
+  }
+
+  .no-margin {
+    margin: 0;
+  }
+
+
+  /* Profile Section */
+  .section-profile {
+    padding-top: 90px;
+  }
+
+  .image {
+    width: 300px;
+    height: 300px;
+  }
+
+  #pimage {
+    height: 200px !important;
+    width: 200px !important;
+  }
+
+  .mission-text {
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    color: black;
+    padding-right: 50px;
+  }
+
+  .profile-image {
+  }
+
+
+
+
+
+
+
+  .text-location, .text-education {
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    color: #414142;
+  }
+
+  .blue-border {
+    border: 1px solid #007dc5;
+  }
+
+  .text-title {
+    font-family: 'Roboto', sans-serif; /* Myriad Regular */
+    font-size: 18px;
+    color: #007dc5;
+  }
+
+  .text-name {
+    font-family: 'Roboto', sans-serif; /*Myriad Bold*/
+    font-weight: bolder;
+    font-size: 28px;
+    color: #414142;
+  }
+
+  /* Header 1 - Erfaring i SYSCO, Tidligere Erfaring OSV */
+  .header-1 {
+    font-family: 'Roboto', sans-serif; /* Myriad Bold */
+    font-weight: bold;
+    font-size: 28px;
+    color: #414142;
+    margin-bottom: 15px;
+  }
+
+  .header-blue {
+    color: #007dc5 !important;
+  }
+
+  /* Header 2 - Årstall og Steder */
+  .header-2 {
+    font-family: 'Roboto', sans-serif; /* Myriad Bold */
+    font-weight: bolder;
+    font-size: 22px;
+    color: #414142;
+  }
+
+  /* Header 3 - Oppdrags Header */
+  .header-3 {
+    font-family: 'Roboto', sans-serif; /* Myriad Bold */
+    font-weight: bold;
+    font-size: 18px;
+    color: #414142;
+  }
+
+  .paragraph-text {
+    font-family: 'Roboto', sans-serif; /* Myriad Bold */
+    font-weight: normal;
+    font-size: 18px;
+    color: #414142;
+  }
+
+  .experience-missions {
+    margin-bottom: 15px;
+  }
+
+  p {
+    margin-bottom: 0;
+  }
+
+  span.tab{
+    padding: 0 80px; /* Or desired space*/
+  }
+</style>
+
+
+<!--container-->
+<div style="overflow: visible !important; padding-left: 90px;">
+
+  <!-- Profile Section -->
+  <div class="col-xs-12 section-profile section margin-b-80">
+
+    <!-- Profile Left-->
+    <div class="col-xs-7 no-padding-left vbottom">
+
+      <!-- Name-->
+      <div class="text-name">
+        {{cv.user.firstname}} {{cv.user.lastname}}
+      </div>
+
+      <!-- Job Title-->
+      <div class="text-title margin-b-60">
+        {{cv.jobtitle}}
+      </div>
+
+      <!-- Location -->
+      <div class="text-location margin-b-10">
+        <span class="glyphicon glyphicon glyphicon-map-marker" style="color:#007dc5"></span>
+        {{get(cv.user.department, departments).name}} - {{get(cv.user.location, locations).name}}
+      </div>
+
+      <!-- Education-->
+      <div class="text-education">
+        <span class="glyphicon glyphicon glyphicon-book" style="color:#007dc5"></span>
+        {{cv.education_title}}
+      </div>
+    </div>
+
+    <!-- Profile Right-->
+    <div class="col-xs-3 profile-image vbottom no-padding">
+      <img ng-src="{{cv.picture}}" class="image" />
+    </div>
+
+  </div>
+
+  <div class="col-xs-12 section-workarea section margin-b-40">
+    <div class="header-1 header-blue">
+      Arbeidsområde
+    </div>
+    <div class="paragraph-text" ng-bind-html="cv.workarea | trusthtml">
+    </div>
+  </div>
+
+  <div class="col-xs-12 section-competence section margin-b-40">
+    <div class="header-1 header-blue">
+      Erfaring / Kompetanse
+    </div>
+    <div class="paragraph-text" ng-bind-html="cv.competence | trusthtml">
+    </div>
+  </div>
+
+  <div class="col-xs-12 section-methods section margin-b-40">
+    <div class="header-1 header-blue">
+      Teknologi / Metode
+    </div>
+    <div class="paragraph-text" ng-bind-html="cv.methods | trusthtml">
+    </div>
+  </div>
+
+  <!-- New Page-->
+  <div class="page-breaker" style="height:500px;"></div>
+
+
+  <!-- Tideligere Erfaringer -->
+  <div class="col-xs-12 section-earlier-experiences section margin-b-40">
+
+    <!-- Title -->
+    <div class="header-1 header-blue">
+      Tidligere Erfaring
+    </div>
+
+    <!-- Experience -->
+    <div class="experience margin-b-40" ng-repeat="experience in cv.experience | filter: { in_sysco: false }">
+
+      <!-- Experience Header -->
+      <div class="header-2">{{experience.from_date | date}} - {{experience.until_date | date}} {{experience.company}}</div>
+
+      <!-- Mission -->
+      <div class="experience-missions" ng-repeat="mission in experience.mission">
+
+        <!-- Mission Header-->
+        <div class="header-3">
+          {{mission.title}}
+        </div>
+
+        <!-- Mission Body-->
+        <div class="paragraph-text" ng-bind-html="mission.text | trusthtml"></div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Erfaringer i Sysco -->
+  <div class="col-xs-12 section-earlier-experiences section margin-b-40">
+
+    <!-- Title -->
+    <div class="header-1 header-blue">
+      Erfaringer i Sysco
+    </div>
+
+    <!-- Experience -->
+    <div class="experience" ng-repeat="experience in cv.experience | filter: { in_sysco: true }">
+
+      <!-- Experience Header -->
+      <div class="header-2">{{experience.from_date | date}} - {{experience.until_date | date}} {{experience.company}}</div>
+
+      <!-- Mission -->
+      <div class="experience-missions" ng-repeat="mission in experience.mission">
+
+        <!-- Mission Header-->
+        <div class="header-3">
+          {{mission.title}}
+        </div>
+
+        <!-- Mission Body-->
+        <div class="paragraph-text" ng-bind-html="mission.text | trusthtml" style="padding-right: 100px;"></div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- New Page-->
+  <div class="page-breaker" style="height:500px;"></div>
+
+
+
+
+
+  <!-- Erfaringer i sysco END -->
+  <!-- Education -->
+  <div class="col-xs-12 section margin-b-40">
+    <div class="header-1 header-blue">
+      Utdanning
+    </div>
+    <div class="education" ng-repeat="education in cv.user.education  | orderBy:'year':true">
+      <div class="paragraph-text">{{education.from_year}} - {{education.until_year}}<span class="tab"></span>{{education.text}}</div>
+    </div>
+  </div>
+
+
+  <!-- Certification -->
+  <div class="col-xs-12 section margin-b-40">
+    <div class="header-1 header-blue">
+      Sertifisering
+    </div>
+    <div class="certification" ng-repeat="certification in cv.user.certification | orderBy:'year':true">
+      <div class="paragraph-text">{{certification.year}}<span class="tab"></span>{{certification.text}}</div>
+    </div>
+  </div>
+
+
+  <!-- Language -->
+  <div class="col-xs-12 section margin-b-40">
+    <div class="header-1 header-blue">
+      Språkkunnskap
+    </div>
+    <div class="language" ng-repeat="language in cv.user.language  | orderBy:'year':true">
+      <div class="paragraph-text">
+        <div class="col-xs-1 no-padding">{{get(language.language, languages)['language']}}</div><span class="tab"></span>Muntlig: {{keyget(language.verbal, languageLevels)}}<span class="tab"></span>Skriftlig: {{keyget(language.written, languageLevels)}}
+      </div>
+    </div>
+  </div>
+
+
+
+
+</div>

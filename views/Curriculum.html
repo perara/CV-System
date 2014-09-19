@@ -1,0 +1,584 @@
+<!-- Menu Header -->
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="background-color: #353535;">
+  <div class="container">
+    <div class="navbar-header">
+
+      <!-- Collapse-->
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+    </div>
+
+
+    <div class="navbar-collapse collapse" style="height: 1px; background-color: #353535; height: 75px !important;">
+      <ul class="nav navbar-nav">
+        <li><a class="sysco-menu-item" href="#"><img class="navbar-brand" src="./media/Logo.png" /></a></li>
+      </ul>
+      <ul class="nav navbar-nav" id="myTab">
+        <li><a class="sysco-menu-item" href="#red" data-toggle="tab">Profil</a></li>
+        <li><a class="sysco-menu-item" href="#orange" data-toggle="tab">Generell Info</a></li>
+        <li><a class="sysco-menu-item" href="#yellow" data-toggle="tab">Erfaringer</a></li>
+        <li><a class="sysco-menu-item" href="#blue" data-toggle="tab">Utdanning</a></li>
+        <li><a class="sysco-menu-item" href="#green" data-toggle="tab">Oppsummering</a></li>
+      </ul>
+
+    </div><!--/.nav-collapse -->
+  </div>
+</div>
+
+
+
+
+
+
+<div id="content" style="margin-top: 40px;">
+
+  <div id="my-tab-content" class="tab-content">
+
+    <div class="tab-pane active" id="red">
+
+      <!-- Main Container-->
+      <div class="col-lg-8 col-lg-offset-2">
+        <div class="col-lg-4">
+          <!-- Picture -->
+          <div class="col-lg-12 picture margin-b-10">
+            <img ng-src="{{cv.picture}}" style="width: 100%; height: 100%" />
+          </div>
+
+          <div class="col-lg-12 margin-b-10 no-padding">
+            <span class="btn sysco-blue btn-file flat col-lg-12 white">
+              Last opp profilbilde <input type="file" name="file" onchange="angular.element(this).scope().uploadImage(this.files)" />
+            </span>
+          </div>
+
+
+          <!-- First Name -->
+          <div class="col-lg-12 no-padding margin-b-10">
+            <input required
+                   class="form-control flat"
+                   type="text"
+                   placeholder="Fornavn"
+                   ng-disabled="true"
+                   value="{{cv.user.firstname}}" />
+          </div>
+
+          <!-- Last Name -->
+          <div class="col-lg-12 no-padding margin-b-10">
+            <input class="form-control flat"
+                   type="text"
+                   placeholder="Etternavn"
+                   ng-disabled="true"
+                   value="{{cv.user.lastname}}" />
+          </div>
+
+          <!-- Job Title-->
+          <div class="col-lg-12 no-padding margin-b-10">
+            <input class="form-control flat"
+                   type="text"
+                   placeholder="Arbeidstittel"
+                   ng-model="cv.jobtitle" />
+          </div>
+
+          <!-- Location -->
+          <div class="col-lg-12 no-padding margin-b-10">
+            <select class="form-control flat" ng-model="cv.user.location" ng-options="location.id as location.name for location in locations">
+              <option style="display:none" value="">Lokasjon</option>
+            </select>
+          </div>
+
+          <!-- Department -->
+          <div class="col-lg-12 no-padding margin-b-10">
+            <select class="form-control flat" ng-model="cv.user.department" ng-options="department.id as department.name for department in departments">
+              <option style="display:none" value="">Avdeling</option>
+            </select>
+
+          </div>
+
+          <!-- Education -->
+          <div class="col-lg-12 no-padding margin-b-10">
+            <input class="form-control flat" type="text" placeholder="Utdannelsesgrad" ng-model="cv.education_title" />
+          </div>
+
+        </div>
+
+        <!-- Competence Matrix -->
+        <div class="col-lg-7">
+
+          <div class="col-lg-12 no-padding margin-b-10">
+            <input type="text" class="form-control flat"
+                   placeholder="Tilføy Kompetanse"
+                   ng-model="selectedCompetency"
+                   typeahead-template-url="customTemplate.html"
+                   typeahead="competence as competence.name for competence in competenceMatrix | filter:$viewValue"
+                   typeahead-on-select='onMatriceSelect($item, $model, $label)' />
+          </div>
+
+          <!-- Expertise Items-->
+          <div class="col-lg-12 expertise-item no-padding" ng-repeat="expertise in cv.user.expertise">
+
+            <div class="fullheight exp-level-square exp-level-{{expertise.level}} col-lg-1">
+              {{expertise.level}}
+            </div>
+            <div class="fullheight vertical-align exp-name col-lg-5"><div>{{get(expertise.id, competenceMatrix).name}}</div></div>
+            <div class="fullheight vertical-align exp-category col-lg-5">{{get(expertise.id, competenceMatrix).category}}</div>
+            <div class="fullheight align-all exp-trash col-lg-1" ng-click="remove($index, cv.user.expertise, 'expertise')">
+              <span class="glyphicon glyphicon-trash white"></span>
+            </div>
+          </div>
+
+          <!-- Next and Save Button -->
+          <div class="pull-right" ng-include src='"buttons.html"'></div>
+
+        </div>
+
+      </div>
+    </div>
+
+
+
+
+
+    <div class="tab-pane" id="orange">
+
+      <!-- Main Container-->
+      <div class="col-lg-8 col-lg-offset-2">
+        <div class="col-lg-4">
+          <!-- Navigation Buttons -->
+          <ul class="nav nav-pills nav-stacked" id="infotab">
+            <li class="active"><a href="#arbeidsomrode" data-target="#arbeidsomrode, #arbeidsomrode_desc" data-toggle="tab">Arbeidsområde</a></li>
+            <li><a href="#erfaring" data-target="#erfaring, #erfaring_desc" data-toggle="tab">Erfaring / kompetanse</a></li>
+            <li><a href="#methods" data-target="#methods, #methods_desc" data-toggle="tab">Teknologi & Metode</a></li>
+          </ul>
+
+          <!-- Description Tabs -->
+          <div class="tab-content">
+            <div class="tab-pane active" id="arbeidsomrode_desc">
+              <p class="faded-text">
+                Oversiktlig opplisting av arbeidsområder.
+                <br /><br />
+                F.eks:
+                <br />
+                Prosjektledelse, utvikling og integrasjon
+              </p>
+            </div>
+            <div class="tab-pane" id="erfaring_desc">
+              <p class="faded-text">
+                Kort tekst om erfaring og kompetanse. Husk å skriv i 3. person.
+                <br /><br />
+                F.eks:
+                <br /><br />
+                <b>{{cv.user.firstname}}</b> har lang og allsidig erfaring fra IT-bransjen og har bred erfaring som systemutvikler og prosjektleder.
+                <br /><br />
+                Har jobbet med utvikling, test og vedlikehold av kundespesifikke løsninger,  integrasjon av irksomhetssystemer og prosjektledelse.
+              </p>
+            </div>
+            <div class="tab-pane" id="methods_desc">
+              <p class="faded-text">
+                Kort oppsummering av faglige kvalifikasjoner.
+                <br /><br />
+                F.eks:
+                <br /><br />
+                <b>{{cv.user.firstname}}</b> har inngående kunnskap om Databaser, Oracle,  MS Sql Server og Datavarehusløsninger på SQL Server 2000-2008.
+
+                <br /><br />
+                <b>{{cv.user.firstname}}</b> har jobbet med integrasjon ved bruk av Oracle Fusion. Sql Server Integration Services og ePuls BI Studio.
+                <br />
+                Innen utvikling har han erfaring med SQL. PL/SQL. T-SQL, Java og C#
+                <br /><br />
+                <b>{{cv.user.firstname}}</b> er sertifisert Scrum Master og har erfaring med bruk av Scrum og Kanban.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-8">
+          <!-- Content -->
+          <div class="tab-content margin-b-10">
+            <div class="tab-pane active" id="arbeidsomrode">
+              <text-angular ta-toolbar="textAngularOptions" ng-model="cv.workarea"></text-angular>
+            </div>
+            <div class="tab-pane" id="erfaring">
+              <text-angular ta-toolbar="textAngularOptions" ng-model="cv.competence"></text-angular>
+            </div>
+            <div class="tab-pane" id="methods">
+              <text-angular ta-toolbar="textAngularOptions" ng-model="cv.methods"></text-angular>
+            </div>
+          </div>
+
+
+          <!-- Next and Save Button -->
+          <div class="pull-right" ng-include src='"buttons.html"'></div>
+        </div>
+
+      </div>
+    </div>
+
+
+
+
+    <div class="tab-pane" id="yellow">
+
+
+      <!-- Main Container-->
+      <div class="col-lg-8 col-lg-offset-2">
+
+
+        <!-- Experience Panel -->
+        <div class="col-lg-12 margin-b-40 vertical-align no-padding">
+
+
+          <div class="col-lg-2">
+            <input type="text"
+                   placeholder="Fra"
+                   class="form-control flat"
+                   ng-click="open($event, 'opened1')"
+                   datepicker-popup="{{format}}"
+                   datepicker-options="dateOptions"
+                   ng-model="experience.from"
+                   is-open="opened1"
+                   max-date="today"
+                   date-disabled="disabled(date, mode)"
+                   ng-required="true"
+                   close-text="Close" />
+          </div>
+          <div class="col-lg-2">
+            <input type="text"
+                   placeholder="Til"
+                   class="form-control flat"
+                   ng-click="open($event, 'opened2')"
+                   datepicker-popup="{{format}}"
+                   datepicker-options="dateOptions"
+                   ng-model="experience.until"
+                   is-open="opened2"
+                   max-date="today"
+                   date-disabled="disabled(date, mode)"
+                   ng-required="true"
+                   close-text="Close" />
+          </div>
+          <div class="col-lg-4">
+            <input type="text" class="form-control flat" placeholder="Arbeidsgiver" ng-disabled="experience.insysco" ng-model="experience.company" />
+          </div>
+
+
+          <div class="col-lg-2">
+            <label class="btn btn-default flat form-control checkbox-{{experience.insysco}}">
+              <input type="checkbox" ng-model="experience.insysco" style="display: none;">Sysco
+            </label>
+          </div>
+
+          <div class="col-lg-2">
+            <button class="form-control btn btn-default" ng-click="createExperience()">Opprett erfaring</button>
+          </div>
+
+        </div>
+
+        <div class="col-lg-12 experience-container">
+
+          <div class="col-lg-12 margin-b-10 experience-item no-padding" ng-repeat="experience in cv.experience | orderBy:'order'">
+            <div class="col-lg-12 experience-header vertical-align no-padding-r">
+              <div class="col-lg-2 experience-date">{{experience.from_date | date:'MM.yyyy'}} - {{experience.until_date | date:'MM.yyyy'}}</div>
+              <div class="col-lg-7 experience-company align-all">{{experience.company}}</div>
+              <div class="pull-right">
+                <div class="experience-button" ng-click="new(experience.mission)"><span class="glyphicon glyphicon-plus white"></span></div>
+                <div class="experience-button" ng-click="orderDown($index, cv.experience)"><span class="glyphicon glyphicon-arrow-down white"></span></div>
+                <div class="experience-button" ng-click="orderUp($index, cv.experience)"><span class="glyphicon glyphicon-arrow-up white"></span></div>
+                <div class="experience-button" ng-click="remove(experience, cv.experience,'experience')"><span class="glyphicon glyphicon-trash white"></span></div>
+              </div>
+            </div>
+
+
+            <div class="col-lg-12 mission" ng-repeat="mission in experience.mission  | orderBy:'order'">
+              <div class="col-lg-10 no-padding-r">
+                <input type="text" class="flat  form-control" ng-model="mission.title" placeholder="Prosjekt / Oppdrag" />
+              </div>
+              <div class="mission-button" ng-click="orderDown($index, experience.mission)"><span class="glyphicon glyphicon-arrow-down white"></span></div>
+              <div class="mission-button" ng-click="orderUp($index, experience.mission)"><span class="glyphicon glyphicon-arrow-up white"></span></div>
+              <div class="mission-button" ng-click="remove(mission, experience.mission, 'mission')"><span class="glyphicon glyphicon-trash white"></span></div>
+
+
+              <div class="col-lg-12 mission-text">
+                <text-angular ta-toolbar="textAngularOptions" ng-model="mission.text"></text-angular>
+              </div>
+            </div>
+          </div>
+          <!-- Next and Save Button -->
+          <div class="pull-right" ng-include src='"buttons.html"'></div>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+
+
+    <!-- Utdanning -->
+    <div class="tab-pane" id="blue">
+
+      <!-- Main Container-->
+      <div class="col-lg-8 col-lg-offset-2">
+
+        <!-- Education Items -->
+        <div class="col-lg-12 margin-b-20">
+
+          <div class="margin-b-10 no-padding">
+
+            <!-- Header -->
+            <div class="col-lg-12 education-header no-padding-r">
+              <div class="col-lg-11 vertical-align education-header-text">Utdanning</div>
+              <div class="pull-right education-button" ng-click="new(cv.user.education)"><span class="glyphicon glyphicon-plus white"></span></div>
+            </div>
+
+            <!-- Body -->
+            <div class="col-lg-12 education-body padding-10" ng-repeat="education in cv.user.education">
+
+              <div class="col-lg-2">
+                <select class="form-control flat" ng-model="education.from_year">
+                  <option value="" disabled selected>Fra</option>
+                  <option ng-repeat="n in [65] | makeRange">{{currentYear - n}}</option>
+                </select>
+              </div>
+              <div class="col-lg-2">
+                <select class="form-control flat" ng-model="education.until_year">
+                  <option value="" disabled selected>Til</option>
+                  <option ng-repeat="n in [65] | makeRange">{{currentYear - n}}</option>
+                </select>
+              </div>
+
+
+              <div class="col-lg-8">
+                <div class="col-lg-10 no-padding-r">
+                  <input type="text" class="form-control flat" placeholder="Utdanning / sted" ng-model="education.text" />
+                </div>
+                <div class="mission-button sysco-blue" ng-click="remove($index, cv.user.education, 'education')"><span class="glyphicon glyphicon-trash white"></span></div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+
+        <!-- Certification Items -->
+        <div class="col-lg-12 margin-b-20">
+
+          <div class="margin-b-10 no-padding">
+
+            <!-- Header -->
+            <div class="col-lg-12 education-header no-padding-r">
+              <div class="col-lg-11 vertical-align education-header-text">Sertifiseringer / Kurs</div>
+              <div class="pull-right education-button" ng-click="new(cv.user.certification)"><span class="glyphicon glyphicon-plus white"></span></div>
+            </div>
+
+            <!-- Body -->
+            <div class="col-lg-12 education-body padding-10" ng-repeat="certification in cv.user.certification">
+
+              <div class="col-lg-2">
+                <select class="form-control flat" ng-model="certification.year">
+                  <option value="" disabled selected>År</option>
+                  <option ng-repeat="n in [65] | makeRange">{{currentYear - n}}</option>
+                </select>
+              </div>
+
+              <div class="col-lg-10">
+                <div class="col-lg-10 no-padding-r">
+                  <input type="text" class="form-control flat" placeholder="Sertifisering" ng-model="certification.text" />
+                </div>
+                <div class="mission-button sysco-blue" ng-click="remove($index, cv.user.certification, 'certification')"><span class="glyphicon glyphicon-trash white"></span></div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Language Items -->
+        <div class="col-lg-12 margin-b-20">
+
+          <div class="margin-b-10 no-padding">
+
+            <!-- Header -->
+            <div class="col-lg-12 education-header no-padding-r">
+              <div class="col-lg-12 vertical-align education-header-text">Språk</div>
+            </div>
+
+            <!-- Body -->
+            <div class="col-lg-12 education-body padding-10">
+
+              <!-- Language Search Field-->
+              <div class="input-group col-lg-12 margin-b-10">
+                <!-- Verbal Skill -->
+                <div class="input-group-btn">
+                  <button type="button" class="btn btn-default dropdown-toggle flat" data-toggle="dropdown">{{verbalLevel && verbalLevel || "Muntlig"}}<span class="caret"></span></button>
+                  <ul class="dropdown-menu">
+                    <li ng-click="verbalLevel = 1">1</li>
+                    <li ng-click="verbalLevel = 2">2</li>
+                    <li ng-click="verbalLevel = 3">3</li>
+                    <li ng-click="verbalLevel = 4">4</li>
+                  </ul>
+                </div>
+
+                <!-- Written Skill-->
+                <div class="input-group-btn">
+                  <button type="button" class="btn btn-default dropdown-toggle flat" data-toggle="dropdown">{{writtenLevel && writtenLevel || "Skriftlig"}}<span class="caret"></span></button>
+                  <ul class="dropdown-menu">
+                    <li ng-click="writtenLevel = 1">1</li>
+                    <li ng-click="writtenLevel = 2">2</li>
+                    <li ng-click="writtenLevel = 3">3</li>
+                    <li ng-click="writtenLevel = 4">4</li>
+                  </ul>
+                </div>
+
+                <input type="text" class="form-control flat"
+                       ng-model="selectedLanguage"
+                       placeholder="Legg til Språk"
+                       typeahead="language as language.language for language in languages | filter:$viewValue:startsWith"
+                       typeahead-on-select='addLanguage($item, $model, $label)' />
+              </div>
+
+
+
+              <div class="col-lg-12 language-item no-padding" ng-repeat="language in cv.user.language">
+
+                <div class="fullheight vertical-align language-name col-lg-5"><div>{{get(language.language, languages).language}}</div></div>
+
+
+                <div class="fullheight pull-right" style="display: flex;">
+
+                  <!-- Verbal-->
+                  <div class="language-level-square exp-level-{{language.verbal}}">
+                    {{language.verbal}}
+                  </div>
+
+                  <!-- Written-->
+                  <div class="language-level-square exp-level-{{language.written}}">
+                    {{language.written}}
+                  </div>
+
+                  <div class="fullheight align-all exp-trash language-trash" ng-click="remove($index, cv.user.language, 'language')">
+                    <img src="http://png-4.findicons.com/files/icons/1580/devine_icons_part_2/128/trash_recyclebin_empty_closed.png" height="20" />
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+          
+          <!-- Next and Save Button -->
+          <div class="pull-right" ng-include src='"buttons.html"'></div>
+
+        </div>
+
+
+      </div>
+
+
+
+    </div>
+
+
+
+
+    <div class="tab-pane" id="green">
+      <div class="row">
+        <div class="col-lg-6 col-lg-offset-3 no-padding">
+          <button ng-click="savePDF()" class="btn btn-lg btn-info flat">Lagre som PDF</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="summary effect7 box col-lg-6 col-lg-offset-3">
+          <div class="template-header" ng-include src='"views/Header.html"'></div>
+          <div class="template-body" ng-include src='"views/Template.html"'></div>
+          <div class="template-footer" ng-include src='"views/Footer.html"'></div>
+        </div>
+      </div>
+      <!--<div class="row">
+        <pre>cv = {{cv | json}}</pre>
+        <pre>deleted = {{deleted | json}}</pre>
+      </div>
+        -->
+    </div>
+    
+    <div ng-show="!saved" class="alert alert-danger col-lg-6 col-lg-offset-3" role="alert">
+      <div><li>Du har ulagrede data!</li></div>
+    </div>
+
+
+
+  </div>
+
+</div>
+
+
+<!-------------------------------------------------------------------------------------->
+<!-------------------------------------------------------------------------------------->
+<!-- Skill Modal Template -->
+<script type="text/ng-template" id="skillModal.html">
+  <div class="modal-header">
+    <h3 class="modal-title">Competency</h3>
+  </div>
+  <div class="modal-body">
+    <h3>Ferdighet i {{item.name}}</h3>
+    <div class="progress progress-striped active">
+      <div class="progress-bar" role="progressbar" aria-valuenow="{{item.level}}" aria-valuemin="0" aria-valuemax="{{max}}" style="width: {{item.level}}%;"></div>
+    </div>
+
+
+    <div class="radio">
+      <label>
+        <input type="radio" ng-model="item.level" value="25" />
+        Litt kompetanse
+      </label>
+    </div>
+    <div class="radio">
+      <label>
+        <input type="radio" ng-model="item.level" value="50" />
+        Noe kompetanse, trenger veiledning
+      </label>
+    </div>
+    <div class="radio">
+      <label>
+        <input type="radio" ng-model="item.level" value="75" />
+        God kompetanse, selvstendig
+      </label>
+    </div>
+    <div class="radio">
+      <label>
+        <input type="radio" ng-model="item.level" value="100" />
+        Ekspert, lære videre
+      </label>
+    </div>
+
+
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary" ng-click="ok()" ng-disabled="!item.level">OK</button>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+  </div>
+</script>
+<!-------------------------------------------------------------------------------------->
+<!-------------------------------------------------------------------------------------->
+<!-- TypeAhead Template -->
+<script type="text/ng-template" id="customTemplate.html">
+  <style>
+    .dropdown-menu {
+      width: 100%;
+    }
+  </style>
+  <div class="col-lg-12" style="width:100%">
+    <div class="col-lg-6" style="margin-left:0!important; padding-left:0!important" bind-html-unsafe="match.label | typeaheadHighlight:query"></div>
+    <div class="col-lg-6" style="color:gray;">{{match.model.category}}</div>
+  </div>
+</script>
+
+<script type="text/ng-template" id="buttons.html">
+  <div class="margin-t-10">
+    <button ng-click="saveCV()" class="btn btn-lg btn-warning flat">Save Data</button>
+    <button class="btn btn-lg btn-info flat sysco-blue" ng-click="nextTab()">Neste</button>
+  </div>
+</script>

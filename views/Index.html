@@ -1,0 +1,42 @@
+﻿
+<div class="col-lg-6 col-lg-offset-3 index-content">
+  <div class="align-all">
+    <h3 style="margin-bottom: 0;">
+      Hei,
+      <item ng-show="user">{{user.firstname}} {{user.lastname}}</item>
+      <item ng-show="!user">Gjest</item>
+      <br /><br />
+    </h3>
+  </div>
+  <div ng-show="user" style="text-align: center; width: 100%; margin-bottom: 10px; font-style: italic ">Her får du noen valg...</div>
+
+<div class="flexcontainer wrap row" ng-show="user">
+  <!--<div><a href="#profil">Min Profil</a></div>-->
+  <div><a href="#cv">CV og Kompetanse</a></div>
+  <div><a href="#cv-list">Oversikt - CV</a></div>
+  <div><a href="#comp-list">Kompetansematrise</a></div>
+
+  <div ng-show="user"><a href="#logout">Logg Ut</a></div>
+  <div ng-show="!user"><a href="#login">Logg Inn</a></div>
+</div>
+
+  <div class="" ng-show="!user" ng-controller="LoginController">
+
+    <div class="col-lg-offset-3 col-lg-6">
+      <!-- Error Message -->
+      <div class="alert {{(status == 200) && 'alert-success' || 'alert-danger'}}" role="alert" ng-show="detail">
+        {{detail}}
+      </div>
+
+      <input ng-model="userLogin.username" type="text" class="form-control" placeholder="Username" required="" autofocus="">
+      <input ng-model="userLogin.password" type="password" class="form-control" placeholder="Password" required="">
+      <div class="checkbox">
+        <label>
+          Remember Me? <input type="checkbox" name="remember_me" value="remember_me" style="position: relative; margin-left: 0;">
+        </label>
+      </div>
+      <button ng-click="login()" class="btn btn-lg btn-primary btn-block flat" type="submit">Sign in</button>
+    </div>
+
+
+  </div>

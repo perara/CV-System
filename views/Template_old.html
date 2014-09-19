@@ -1,0 +1,252 @@
+<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  /* This forces bottom valign */
+  .vbottom {
+    display: inline-block;
+    vertical-align: bottom;
+    float: none;
+  }
+
+  .page-breaker {
+    display: block;
+    page-break-after: always;
+    /*border :1px solid red;*/
+    margin-bottom: 20px;
+  }
+
+  /* General Stuff */
+  .margin-b-40 {
+    margin-bottom: 40px;
+  }
+
+
+  .margin-b-80 {
+    margin-bottom: 80px;
+  }
+
+  .section {
+    page-break-inside: avoid; /* IMPORTANT for Page breaking */
+  }
+
+  .no-padding {
+    padding: 0;
+  }
+
+  .no-padding-left {
+    padding-left: 0;
+  }
+
+  .no-margin {
+    margin: 0;
+  }
+
+
+  /* Profile Section */
+  .section-profile {
+  }
+
+  .image {
+    width: 240px;
+    height: 240px;
+  }
+
+  #pimage {
+    height: 200px !important;
+    width: 200px !important;
+  }
+
+  .mission-text {
+  }
+
+  .profile-image {
+    position: relative;
+    left: 0px;
+  }
+
+
+
+
+
+
+
+  .text-location, .text-education {
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    color: #414142;
+  }
+
+  .text-title {
+    font-family: 'Roboto', sans-serif; /* Myriad Regular */
+    font-size: 12;
+    color: #007dc5;
+  }
+
+  .text-name {
+    font-family: 'Roboto', sans-serif; /*Myriad Bold*/
+    font-weight: bold;
+    font-size: 16px;
+    color: #414142;
+  }
+
+  /* Header 1 - Erfaring i SYSCO, Tidligere Erfaring OSV */
+  .header-1 {
+    font-family: 'Roboto', sans-serif; /* Myriad Bold */
+    font-weight: bold;
+    font-size: 20px;
+    color: #414142;
+  }
+
+  /* Header 2 - Årstall og Steder */
+  .header-2 {
+    font-family: 'Roboto', sans-serif; /* Myriad Bold */
+    font-weight: bold;
+    font-size: 16px;
+    color: #007dc5;
+  }
+
+  /* Header 3 - Oppdrags Header */
+  .header-3 {
+    font-family: 'Roboto', sans-serif; /* Myriad Bold */
+    font-weight: bold;
+    font-size: 12px;
+    color: #414142;
+  }
+</style>
+
+
+<!--container-->
+<div class="" style="overflow: visible !important; margin-left:45px;">
+  <div class="margin-b-40"></div>
+  <div class="col-xs-12 section-profile section margin-b-80">
+    <div class="col-xs-6 vbottom no-padding-left">
+      <div class="margin-b-40">
+        <div class="text-name">
+          {{cv.user.firstname}} {{cv.user.lastname}}
+        </div>
+        <div class="text-title">
+          {{cv.jobtitle}}
+        </div>
+      </div>
+      <div class="block">
+
+        <div class="text-location">
+          <span class="glyphicon glyphicon-star"></span>
+          {{get(cv.user.location, locations).name}} - {{get(cv.user.department, departments).name}}
+        </div>
+        <div class="text-education">
+          <span class="glyphicon glyphicon-star"></span>
+          {{cv.education_title}}
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-4 vbottom profile-image">
+      <img ng-src="{{cv.picture}}" class="image" />
+    </div>
+  </div>
+
+  <div class="col-xs-12 section-workarea section margin-b-40">
+    <div class="header-1">
+      Arbeidsområde
+    </div>
+    <p class="section-freetext text" ng-bind-html="cv.workarea | trusthtml">
+    </p>
+  </div>
+  <div class="col-xs-12 section-competence section margin-b-40">
+    <div class="header-1">
+      Erfaring / Kompetanse
+    </div>
+    <div class="section-freetext" ng-bind-html="cv.competence | trusthtml">
+    </div>
+  </div>
+  <div class="col-xs-12 section-methods section margin-b-40">
+    <div class="header-1">
+      Teknologi / Metode
+    </div>
+    <div class="section-freetext" ng-bind-html="cv.methods | trusthtml">
+    </div>
+  </div>
+
+  <div class="page-breaker" style="height:500px;"></div>
+  <!-- Tideligere Erfaringer -->
+  <div class="col-xs-12 section-earlier-experiences section margin-b-40">
+    <div class="header-1">
+      Tidligere Erfaring
+    </div>
+    <div class="experience" ng-repeat="experience in cv.experience | filter: { in_sysco: false }">
+      <div class="header-2">{{experience.from_date | date}} - {{experience.until_date | date}} {{experience.company}}</div>
+      <div class="experience-missions" ng-repeat="mission in experience.mission">
+        <div class="header-3">
+          {{mission.title}}
+        </div>
+        <div class="mission-text" ng-bind-html="mission.text | trusthtml">
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- Tidligere erfaringer END -->
+  <!-- Erfaringer i Sysco -->
+  <div class="col-xs-12 section-earlier-experiences section margin-b-40">
+    <div class="header-1">
+      Erfaringer i Sysco
+    </div>
+    <div class="experience" ng-repeat="experience in cv.experience | filter: { in_sysco: true }">
+      <div class="header-2">{{experience.from_date | date}} - {{experience.until_date | date}} {{experience.company}}</div>
+      <div class="experience-missions" ng-repeat="mission in experience.mission">
+        <div class="header-3">
+          {{mission.title}}
+        </div>
+        <div class="mission-text" ng-bind-html="mission.text | trusthtml">
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- Erfaringer i sysco END -->
+  <!-- Education -->
+  <div class="col-xs-12 section margin-b-40">
+    <div class="header-1">
+      Utdanning
+    </div>
+    <div class="education" ng-repeat="education in cv.user.education">
+      <div class="header-2">{{education.from_year}}-{{education.until_year}} - {{education.text}}</div>
+    </div>
+  </div>
+
+
+  <!-- Certification -->
+  <div class="col-xs-12 section margin-b-40">
+    <div class="header-1">
+      Sertifisering
+    </div>
+    <div class="certification" ng-repeat="certification in cv.user.certification">
+      <div class="header-2">{{certification.year}} - {{certification.text}}</div>
+    </div>
+  </div>
+
+
+  <!-- Language -->
+  <div class="col-xs-12 section margin-b-40">
+    <div class="header-1">
+      Språkkunnskap
+    </div>
+    <div class="language" ng-repeat="language in cv.user.language">
+      <div class="header-2">
+        {{get(language.language, languages)['language']}} -
+        <ul>
+          <li><b>Muntlig: </b> Meget Bra</li>
+          <li><b>Skriftlig: </b> Meget Bra</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+
+
+</div>

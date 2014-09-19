@@ -1,0 +1,60 @@
+﻿.flat {
+    border-radius: 0 !important;
+}
+
+.no-padding {
+    padding: 0 !important;
+}
+
+.no-padding-l {
+  padding-left: 0 !important;
+}
+
+.no-padding-r {
+  padding-right: 0 !important;
+}
+
+
+.margin-b-10 {
+    margin-bottom: 10px;
+}
+
+.margin-t-10 {
+    margin-top: 10px;
+}
+
+.fullheight {
+    height: 100%;
+}
+
+.vertical-align {
+    display: flex;
+    align-items: center;
+}
+
+.align-all {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.white, .white a {
+  color: #fff;
+}
+
+.no-margin {
+  margin: 0;
+}
+
+.padding-10 {
+  padding: 10px;
+}
+
+.margin-b-20 {
+  margin-bottom: 20px;
+}
+
+/* Specifically fix for paragraphs*/
+div.text-wrap p {
+  margin: 0;
+}

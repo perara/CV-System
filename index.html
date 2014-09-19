@@ -1,0 +1,55 @@
+﻿<!doctype html>
+<html class="no-js" style="height: 100%">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="vendor.min.css" />
+  <link rel="stylesheet" href="app.min.css" />
+</head>
+
+<body ng-app="frontendApp" class="background" style="height: 100%">
+
+  <div class="container col-lg-12 content">
+
+    <!-- Nav bar-->
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+
+          <!-- Collapse-->
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+
+        </div>
+
+
+        <div class="navbar-collapse collapse" style="height: 1px; background-color: #353535; height: 75px !important;">
+
+          <ul class="nav navbar-nav">
+            <li><a class="sysco-menu-item" href="#cv"><img class="navbar-brand" src="./media/Logo.png" /></a></li>
+            <li><a class="sysco-menu-item" href="#cv">CV og Kompetanse</a></li>
+            <li><a class="sysco-menu-item" href="#cv-list">Oversikt - CV</a></li>
+            <li><a class="sysco-menu-item" href="#comp-list">Kompetansematrisen</a></li>
+          </ul>
+
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+
+
+
+    <div ng-view=""></div>
+
+  </div>
+
+
+  <script src="app.js"></script>
+</body>
+</html>

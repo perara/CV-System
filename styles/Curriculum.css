@@ -1,0 +1,233 @@
+﻿/*Header*/
+.navbar-nav a {
+  height: 76px;
+  color: #ffffff;
+}
+
+
+
+.sysco-menu-item {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  min-width: 150px;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+}
+
+/* Remove bootstrap hover*/
+.navbar-nav li a {
+  background-color: inherit !important;
+  color: #ffffff !important;
+}
+
+.navbar-nav li {
+  height: 76px;
+}
+
+.cv-right-nav {
+  position: absolute;
+  right: 0;
+  margin-right: 0 !important;
+}
+
+.navbar-nav li.active {
+  background-image: url('./media/Knapp_160x76.png');
+  background-size: 100% 100%;
+  padding-left: 15px;
+}
+
+.cv-right-nav li ul {
+  background-color: #353535;
+}
+
+  .cv-right-nav li ul li {
+    height: 40px;
+  }
+
+.cv-right-nav li a.dropdown-toggle{
+  display: flex !important;
+  align-items: center !important;
+}
+
+
+
+.navbar {
+  height: 76px !important;
+  background-color: #353535;
+}
+
+.navbar-menu {
+  height: 76px !important;
+}
+
+/*Content*/
+.content {
+  margin-top: 75px;
+}
+
+
+/*Tab1*/
+.picture {
+  background-color: #ffffff;
+  min-height: 300px;
+  height: 300px;
+  padding: 5px !important;
+}
+
+.expertise-item, .language-item {
+  height: 50px;
+  background-color: #807E7F;
+  margin-bottom: 1px;
+}
+
+.exp-level-0 {
+  background-color: #ffffff;
+}
+
+.exp-level-1 {
+  background-color: #FF0200;
+}
+
+.exp-level-2 {
+  background-color: #F3EA00;
+}
+
+.exp-level-3 {
+  background-color: green;
+}
+
+.exp-level-4 {
+  background-color: #00AEF0;
+}
+
+.exp-level-square {
+  font-weight: bold;
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.exp-name, .language-name {
+  font-weight: bold;
+  color: white;
+}
+
+.exp-category {
+  color: black;
+}
+
+.exp-trash {
+  background-color: #353535;
+}
+
+  .exp-trash:hover {
+    cursor: pointer;
+  }
+
+/* Generell info tab (Tab1)*/
+
+#infotab li {
+  background-color: #BFBBBC;
+}
+
+  #infotab li a {
+    color: #353535;
+  }
+
+#infotab .active a {
+  color: #ffffff !important;
+  font-weight: bold;
+}
+
+#infotab li {
+  margin-bottom: 10px;
+}
+
+.faded-text {
+  color: #807e7f;
+  padding: 5px;
+}
+
+
+/* Tab 3*/
+.checkbox-true {
+  background-color: #00AEF0 !important;
+}
+
+.experience-header, .education-header {
+  background-color: #00AEF0;
+}
+
+.experience-item {
+  background-color: #BFBBBC;
+}
+
+.experience-button, .education-button {
+  background-color: #007DC6;
+  height: 35px;
+  width: 45px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.mission-button {
+  margin-top: 1px;
+  background-color: #D8D8D8;
+  height: 32px;
+  width: 45px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-left: -3px !important;
+}
+
+.mission {
+  padding: 10px;
+}
+
+.mission-text {
+  margin-top: 10px;
+}
+
+
+.experience-date {
+  color: white;
+  font-weight: bold;
+}
+
+.experience-company {
+  font-weight: bold;
+}
+
+/* Tab 4*/
+.education-header-text {
+  height: 35px;
+  color: white;
+  font-weight: bold;
+}
+
+.education-body {
+  background-color: #D8D8D8;
+}
+
+.language-trash {
+  margin-left: 5px;
+  width: 50px;
+}
+
+.language-level-square {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  width: 50px !important;
+  margin-left: 5px;
+}

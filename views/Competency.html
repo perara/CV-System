@@ -1,0 +1,54 @@
+﻿<h3>Kompetansematrise</h3>
+<span style="opacity: 0.5">...</span>
+
+<table>
+  <thead>
+    <tr>
+      <td>Level</td>
+      <td>Expertise</td>
+      <td>Firstname</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <select class="col-lg-2 form-control" ng-model="search.level">
+          <option value="">Ingen Valgt</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select>
+      </td>
+      <td><input class="col-lg-2 form-control" type="text" ng-model="search.expertise"></td>
+      <td><input class="col-lg-2 form-control" type="text" ng-model="search.name"></td>
+    </tr>
+  </tbody>
+
+</table>
+
+
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Navn</th>
+      <th>Kompetanse</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr ng-repeat="user in users  | filter:doFiltering(search)">
+      <td>{{user.firstname}} {{user.lastname}}</td>
+      <td>
+        <div ng-repeat="expertise in user.expertise | filter:search.expertise" class="btn btn-info flat" style="background-color: gainsboro;">
+
+          {{expertise.name}} - {{expertise.level}}
+        </div>
+      </td>
+    </tr>
+
+  </tbody>
+
+
+</table>
